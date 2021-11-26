@@ -127,3 +127,11 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Keys
+keys/*
+!keys/README.md
+
+# Sample files
+_.py
+test
