@@ -11,15 +11,16 @@ def make_arguments():
     parser.add_argument('--csv', '-c', help="csv file", type=str)
     parser.add_argument('--delimiter', '-d', help="csv delimiter", type=str)
     parser.add_argument('--key', '-k', help="key string or file", type=str)
+    parser.add_argument('--line', '-l', help="key line number", type=int)
     parser.add_argument('--output', '-o', help="output file name", type=str)
     parser.add_argument('--fields', '-f', help="encrypted fields", nargs="+")
     return parser.parse_args()
 
-def read_key(key):
+def read_key(key, line):
     if os.path.exists(key):
         with open(key, 'r') as _file:
             _read_key = _file.read()
-            _read_key.splitlines()[0]
+            _read_key = _read_key.splitlines()[line]
     else:
         _read_key = key
     return literal_eval(_read_key)
@@ -27,8 +28,8 @@ def read_key(key):
 def run():
 
     _c = MetaCrypt()
-
-    _key = read_key(args.key) if args.key else deferred_raise('missing key')
+    _line = args.line if args.line else 0
+    _key = read_key(args.key, _line) if args.key else deferred_raise('missing key')
     _file = args.csv if args.csv else deferred_raise('missing csv file')
     _delimiter = args.delimiter if args.delimiter else ','
     _output = args.output if args.output else deferred_raise('missing output file path')
