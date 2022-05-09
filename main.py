@@ -28,6 +28,8 @@ def read_key(key, line):
 
 def run():
 
+    _folder = ""
+
     _c = MetaCrypt()
     _line = args.line if args.line else 0
     _key = read_key(args.key, _line) if args.key else deferred_raise('missing key')
@@ -39,6 +41,9 @@ def run():
 
     if not os.path.exists(_file):
         raise Exception('input file does not exist')
+    else:
+        _folder = os.path.dirname(os.path.abspath(_file))
+        _output = f"{_folder}/{_output}" if "/" not in _output else _output
 
     if os.path.exists(_output):
         raise Exception('output file already exists, cannot overwrite')
@@ -67,6 +72,7 @@ def run():
             for error in _errors:
                 _file.write(f'{error.get("field")}{_delimiter}{error.get("value")}{_delimiter}{error.get("error_type")}{_delimiter}{error.get("error_message")}\n')
             _file.close()
+        print(f"errors written to {_error_file}")
 
 if __name__ == "__main__":
     
