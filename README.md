@@ -30,6 +30,8 @@ The program `main.py` takes the following arguments:
 
 `-k` The key file
 
+`-l` Line location in the key file of the key
+
 `-o` The name of the output file (does not have to exist)
 
 `-f` List of fields to decrypt
