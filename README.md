@@ -28,11 +28,11 @@ The program `main.py` takes the following arguments:
 
 `-d` CSV delimiter; defaults to comma
 
+`-o` The name of the output file (must not exist)
+
 `-k` The key file
 
-`-l` Line location in the key file of the key
-
-`-o` The name of the output file (does not have to exist)
+`-l` Line number in the key file of the key (zero-indexed, defaults to zero)
 
 `-f` List of fields to decrypt
 
@@ -40,4 +40,10 @@ The program `main.py` takes the following arguments:
 
 Usage:
 
-`python main.py -c=path/to/file.csv -d=";" -k=path/to/key.pem -f field1 field2 -o=output_file_name.csv`
+```
+python main.py
+-c=path/to/file.csv -d=";"
+-o=output_file_name.csv
+-k=path/to/key.pem -l=1
+-f field1 field2
+```
